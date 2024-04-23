@@ -37,7 +37,7 @@ export const ButtonLogin = styled.TouchableOpacity`
 `
 
 export const ButtonLoginText = styled.Text`
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     color: ${theme.colors.background};
     text-transform: uppercase;
@@ -52,6 +52,7 @@ export const ButtonSignupText = styled(ButtonLoginText)`
 
 export const styles = StyleSheet.create({
     logo: {
+        marginBottom: "30%",
         marginRight: 10
     },
     text_midle: {
