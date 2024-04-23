@@ -19,9 +19,9 @@ const LoginScreen = () => {
 
             <Logo style={styles.logo} />
             <ContainerInputsLogin>
-                <InputDefault placeholderValue="E-mail"></InputDefault>
+                <InputDefault placeholderType="E-mail"></InputDefault>
                 <InputDefault
-                    placeholderValue="Senha"
+                    placeholderType="Senha"
                     security={true}>
                 </InputDefault>
             </ContainerInputsLogin>

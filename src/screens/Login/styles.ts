@@ -71,6 +71,6 @@ export const ForgotPasswordText = styled.Text`
 export const styles = StyleSheet.create({
     logo: {
         marginBottom: 40,
-        marginRight: 10
+        marginRight: 20
     }
 })

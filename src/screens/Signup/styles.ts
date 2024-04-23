@@ -2,17 +2,33 @@ import styled from 'styled-components/native';
 import theme from '../../styles/theme';
 import { StyleSheet } from 'react-native';
 
-export const ContainerStart = styled.View`
+export const ContainerSignup = styled.View`
     display: flex;
-    position: relative;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     background-color: ${theme.colors.background};
     height: 100%;
     width: 100%;
-    padding: 0 5%;
+`
+
+export const ContainerSignupData = styled.View`
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: ${theme.colors.background};
+    height: 100%;
+    width: 100%;
+    padding: 25% 5% 0;
     gap: 30px;
+`
+
+export const ContainerSignupSuccessFully = styled(ContainerSignupData)`
+    padding-top: 0;
+    gap: 0;
+    justify-content: center;   
 `
 
 export const ContainerInputsSignUp = styled.View`
@@ -24,22 +40,6 @@ export const ContainerInputsSignUp = styled.View`
     gap: 20px;
 `
 
-export const InputFirstName = styled.TextInput`
-    height: 55px;
-    width: 100%;
-    border-radius: 30px;
-    background-color: ${theme.colors.color_light};
-    padding: 0 20px;
-`
-
-export const InputLastName = styled(InputFirstName)``
-
-export const InputEmail = styled(InputFirstName)``
-
-export const InputPassword = styled(InputFirstName)``
-
-export const InputConfirmPassword = styled(InputFirstName)``
-
 export const ButtonRegister = styled.TouchableOpacity`
     display: flex;
     align-items: center;
@@ -50,14 +50,28 @@ export const ButtonRegister = styled.TouchableOpacity`
     color: ${theme.colors.background};
     background-color: ${theme.colors.secondary};
     text-transform: uppercase;
+    position: absolute;
+    bottom: 5%;
 `
 
 export const ButtonRegisterText = styled.Text`
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     color: ${theme.colors.background};
     text-transform: uppercase;
 `
+
+export const ContainerFooter = styled.View`
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    height: auto;
+    width: 100%;
+`
+
+export const ButtonDirectionLogin = styled(ButtonRegister)``
+
+export const ButtonDirectionLoginText = styled(ButtonRegisterText)``
 
 export const styles = StyleSheet.create({
     text_header: {
@@ -65,9 +79,25 @@ export const styles = StyleSheet.create({
         color: theme.colors.color_light,
         fontWeight: "500"
     },
-    text_footer: {
-        fontSize: 14,
+    text_header_successfully: {
+        textAlign: "center",
+        fontSize: 20,
         color: theme.colors.color_light,
-        fontWeight: "400"
+        fontWeight: "500",
+        position: "absolute",
+        top: "15%"
+    },
+    text_footer: {
+        fontSize: 12,
+        fontWeight: "400",
+        color: theme.colors.color_light
+    },
+    checkbox_background: {
+        padding: 0,
+        margin: 0,
+        backgroundColor: theme.colors.background,
+    },
+    disabled_button: {
+        backgroundColor: 'rgba(179, 233, 199, 0.7)'
     }
 })
