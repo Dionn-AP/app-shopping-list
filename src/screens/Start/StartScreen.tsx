@@ -26,15 +26,15 @@ const StartScreen = () => {
                 <ButtonLogin
                     onPress={() => nav.navigate("login")}
                     activeOpacity={0.8}>
-                    <ButtonLoginText>Entrar</ButtonLoginText>
+                    <ButtonLoginText style={{ fontFamily: "Montserrat_600SemiBold" }}>Entrar</ButtonLoginText>
                 </ButtonLogin>
 
-                <Text style={styles.text_midle}>ou</Text>
+                <Text style={ [styles.text_midle, { fontFamily: "Montserrat_600SemiBold" }]}>ou</Text>
 
                 <ButtonSignup
                     onPress={() => nav.navigate("signup")}
                     activeOpacity={0.8}>
-                    <ButtonSignupText>Cadastre-se</ButtonSignupText>
+                    <ButtonSignupText style={{ fontFamily: "Montserrat_600SemiBold" }}>Cadastre-se</ButtonSignupText>
                 </ButtonSignup>
             </ContainerButtonsStart>
 

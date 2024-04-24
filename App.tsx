@@ -14,6 +14,7 @@ import {
 
 export default function App() {
   const [fontsLoaded] = useFonts({
+    Montserrat_100Thin,
     Montserrat_200ExtraLight,
     Montserrat_300Light,
     Montserrat_400Regular,

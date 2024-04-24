@@ -5,6 +5,8 @@ import React from 'react';
 interface PropsPlaceholder {
     placeholderType: string;
     security?: boolean;
+    stateValue: string;
+    setValue: (arg0: string) => void;
 }
 
 export const InputModel = styled.TextInput`
@@ -16,11 +18,14 @@ export const InputModel = styled.TextInput`
     padding: 0 20px;
 `
 
-const InputDefault = ( {placeholderType, security}: PropsPlaceholder ) => {
-    return(
-        <><InputModel 
-        placeholder={placeholderType}
-        secureTextEntry={security}
+const InputDefault = ({ placeholderType, security, setValue, stateValue }: PropsPlaceholder) => {
+    return (
+        <><InputModel
+            placeholder={placeholderType}
+            secureTextEntry={security}
+            onChangeText={setValue}
+            value={stateValue}
+            autoCapitalize="none"
         ></InputModel></>
     )
 }
