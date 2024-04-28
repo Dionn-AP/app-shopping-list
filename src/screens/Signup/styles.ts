@@ -69,10 +69,6 @@ export const ContainerFooter = styled.View`
     width: 100%;
 `
 
-export const ButtonDirectionLogin = styled(ButtonRegister)``
-
-export const ButtonDirectionLoginText = styled(ButtonRegisterText)``
-
 export const styles = StyleSheet.create({
     text_header: {
         fontSize: 16,

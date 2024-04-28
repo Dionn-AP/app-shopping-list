@@ -9,7 +9,6 @@ import {
 
 import InputDefault from '../../components/InputDefault/InputDefault';
 import GoBackButton from '../../components/GoBack/GoBack';
-import { IPropsLogin } from '../../@types';
 import { useState } from 'react';
 
 const ForgotPassword = () => {
