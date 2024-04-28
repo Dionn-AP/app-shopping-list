@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Text } from "react-native";
+import { Text, SafeAreaView } from "react-native";
 import { TabView, SceneMap } from 'react-native-tab-view';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 import ButtonDefault from '../../components/ButtonDefault/ButtonDefault';
 
