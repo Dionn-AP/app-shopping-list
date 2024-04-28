@@ -4,7 +4,7 @@ import {
     styles
 } from './styles';
 
-import { Text } from 'react-native';
+import { Text, SafeAreaView } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -16,31 +16,33 @@ const StartScreen = () => {
     const nav = useNavigation();
 
     return (
-        <ContainerStart>
+        <SafeAreaView style={{ flex: 1 }}>
+            <ContainerStart>
 
-            <Logo style={styles.logo} />
+                <Logo style={styles.logo} />
 
-            <ContainerButtonsStart>
-                <ButtonDefault
-                    text="Login"
-                    colorButton={theme.button_login.color}
-                    bgColor={theme.button_login.background}
-                    screen="login"
-                    positionButton="initial"
-                />
+                <ContainerButtonsStart>
+                    <ButtonDefault
+                        text="Login"
+                        colorButton={theme.button_login.color}
+                        bgColor={theme.button_login.background}
+                        screen="login"
+                        positionButton="initial"
+                    />
 
-                <Text style={[styles.text_midle, { fontFamily: "Montserrat_600SemiBold" }]}>ou</Text>
+                    <Text style={[styles.text_midle, { fontFamily: "Montserrat_600SemiBold" }]}>ou</Text>
 
-                <ButtonDefault
-                    text="Cadastre-se"
-                    colorButton={theme.button_signup.color}
-                    bgColor={theme.button_signup.background}
-                    screen="signup"
-                    positionButton="initial"
-                />
-            </ContainerButtonsStart>
+                    <ButtonDefault
+                        text="Cadastre-se"
+                        colorButton={theme.button_signup.color}
+                        bgColor={theme.button_signup.background}
+                        screen="signup"
+                        positionButton="initial"
+                    />
+                </ContainerButtonsStart>
 
-        </ContainerStart>
+            </ContainerStart>
+        </SafeAreaView>
     );
 }
 

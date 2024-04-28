@@ -9,32 +9,37 @@ import {
 
 import InputDefault from '../../components/InputDefault/InputDefault';
 import GoBackButton from '../../components/GoBack/GoBack';
+import { SafeAreaView } from 'react-native';
 import { useState } from 'react';
 
 const ForgotPassword = () => {
     const [inputEmail, setInputEmail] = useState("");
 
     return (
-        <ContainerForgotPassword>
-            <GoBackButton screen="login" />
-            <ContainerContentTop>
-                <ForgotPasswordTextHeader style={{ fontFamily: "Montserrat_600SemiBold" }}>Informe o e-mail cadastrado na conta e iremos lhe enviar um código para redefinir a sua senha.</ForgotPasswordTextHeader>
-                <InputDefault
-                    setValue={setInputEmail}
-                    stateValue={inputEmail}
-                    placeholderType="E-mail"
-                ></InputDefault>
-            </ContainerContentTop>
+        <SafeAreaView style={{ flex: 1 }}>
 
-            <ButtonSend
-                style={!inputEmail && styles.disabled_button}
-                disabled={!inputEmail}
-                activeOpacity={0.8}
-            >
-                <ButtonSendText>Cadastrar</ButtonSendText>
-            </ButtonSend>
+            <ContainerForgotPassword>
+                <GoBackButton screen="login" />
+                <ContainerContentTop>
+                    <ForgotPasswordTextHeader style={{ fontFamily: "Montserrat_600SemiBold" }}>Informe o e-mail cadastrado na conta e iremos lhe enviar um código para redefinir a sua senha.</ForgotPasswordTextHeader>
+                    <InputDefault
+                        setValue={setInputEmail}
+                        stateValue={inputEmail}
+                        placeholderType="E-mail"
+                    ></InputDefault>
+                </ContainerContentTop>
 
-        </ContainerForgotPassword>
+                <ButtonSend
+                    style={!inputEmail && styles.disabled_button}
+                    disabled={!inputEmail}
+                    activeOpacity={0.8}
+                >
+                    <ButtonSendText>Cadastrar</ButtonSendText>
+                </ButtonSend>
+
+            </ContainerForgotPassword>
+
+        </SafeAreaView>
     );
 }
 
