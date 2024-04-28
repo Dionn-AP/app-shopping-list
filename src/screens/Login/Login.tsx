@@ -8,18 +8,22 @@ import {
     styles
 } from './styles';
 
+import { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
+
 import GoBackButton from '../../components/GoBack/GoBack';
 import Logo from '../../assets/logo.svg';
 import InputDefault from '../../components/InputDefault/InputDefault';
-import { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import ButtonDefault from '../../components/ButtonDefault/ButtonDefault';
+
+import theme from '../../styles/theme';
 
 const LoginScreen = () => {
     const nav = useNavigation();
 
     const [inputEmail, setInputEmail] = useState("");
     const [inputPassword, setInputPassword] = useState("");
-    
+
     return (
         <ContainerHome>
             <GoBackButton screen="start" />
@@ -38,9 +42,14 @@ const LoginScreen = () => {
                 </InputDefault>
             </ContainerInputsLogin>
 
-            <ButtonEntry activeOpacity={0.8}>
-                <ButtonEntryText style={{ fontFamily: "Montserrat_600SemiBold" }}>Entrar</ButtonEntryText>
-            </ButtonEntry>
+            <ButtonDefault
+                text="Entrar"
+                colorButton={theme.button_login.color}
+                bgColor={theme.button_login.background}
+                screen="getstarted"
+                positionButton="absolute"
+            />
+
             <ForgotPassword onPress={() => nav.navigate("forgot")} activeOpacity={1}>
                 <ForgotPasswordText style={{ fontFamily: "Montserrat_500Medium" }}>Esqueci minha senha</ForgotPasswordText>
             </ForgotPassword>

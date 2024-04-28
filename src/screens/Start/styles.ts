@@ -20,34 +20,8 @@ export const ContainerButtonsStart = styled.View`
     position: absolute;
     flex-direction: column;
     width: 100%;
-    gap: 10px;
     bottom: 5%;
-`
-
-export const ButtonLogin = styled.TouchableOpacity`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 55px;
-    width: 100%;
-    border-radius: 30px;
-    color: ${theme.colors.background};
-    background-color: ${theme.colors.secondary};
-    text-transform: uppercase;
-`
-
-export const ButtonLoginText = styled.Text`
-    font-size: 16px;
-    font-weight: 700;
-    color: ${theme.colors.background};
-    text-transform: uppercase;
-`
-
-export const ButtonSignup = styled(ButtonLogin)`
-    background-color: ${theme.button_signup.background};
-`
-
-export const ButtonSignupText = styled(ButtonLoginText)`
+    gap: 8px;
 `
 
 export const styles = StyleSheet.create({
@@ -56,8 +30,10 @@ export const styles = StyleSheet.create({
         marginRight: 10
     },
     text_midle: {
+        textAlign: "center",
         fontSize: 16,
         fontWeight: "500",
-        color: theme.colors.color_light
+        color: theme.colors.color_light,
+        marginBottom: 10
     }
 })

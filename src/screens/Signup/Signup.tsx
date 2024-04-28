@@ -17,10 +17,9 @@ import {
     ContainerFooter,
     ContainerSignupData,
     ContainerSignupSuccessFully,
-    styles,
-    ButtonDirectionLogin,
-    ButtonDirectionLoginText,
+    styles
 } from './styles';
+import ButtonDefault from '../../components/ButtonDefault/ButtonDefault';
 
 const SignUp = () => {
     const nav = useNavigation();
@@ -34,7 +33,7 @@ const SignUp = () => {
     const [inputConfirmPassword, setInputConfirmPassword] = useState("");
 
     const verifyInputEmpty = () => {
-        if(!inputFirstName || !inputLastName || !inputEmail || !inputPassword || !inputConfirmPassword) {
+        if (!inputFirstName || !inputLastName || !inputEmail || !inputPassword || !inputConfirmPassword) {
             return true;
         }
     }
@@ -101,9 +100,13 @@ const SignUp = () => {
                         <Text style={[styles.text_header_successfully, { fontFamily: "Montserrat_600SemiBold" }]} >Parabéns. Usuário cadastrado com sucesso!</Text>
                         <ImageSuccessfully />
 
-                        <ButtonDirectionLogin onPress={() => nav.navigate("login")}>
-                            <ButtonDirectionLoginText style={{ fontFamily: "Montserrat_600SemiBold" }}>Login</ButtonDirectionLoginText>
-                        </ButtonDirectionLogin>
+                        <ButtonDefault
+                            text="Login"
+                            colorButton={theme.button_login.color}
+                            bgColor={theme.button_login.background}
+                            screen="login"
+                            positionButton="absolute"
+                        />
 
                     </ContainerSignupSuccessFully>
 
