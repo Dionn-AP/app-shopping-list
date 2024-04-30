@@ -7,6 +7,7 @@ const theme = {
       background: '#5603AD',
       color_light: '#FFFFFF',
       color_text_default: '#252627',
+      color_error: '#F93943'
     },
     button_login: {
       background: '#B3E9C7',
