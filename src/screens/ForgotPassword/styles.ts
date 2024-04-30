@@ -1,6 +1,7 @@
 import styled from 'styled-components/native';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import theme from '../../styles/theme';
+const { width } = Dimensions.get('window');
 
 export const ContainerForgotPassword = styled.View`
     display: flex;
@@ -30,7 +31,7 @@ export const ForgotPasswordTextHeader = styled.Text`
     margin-bottom: 40px;
 `
 
-export const ButtonSend = styled.TouchableOpacity`
+export const ButtonSendEmail = styled.TouchableOpacity`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,11 +45,35 @@ export const ButtonSend = styled.TouchableOpacity`
     bottom: 5%;
 `
 
-export const ButtonSendText = styled.Text`
+export const ButtonSendEmailText = styled.Text`
     font-size: 16px;
     font-weight: 700;
     color: ${theme.colors.background};
     text-transform: uppercase;
+`
+
+export const ButtonSendCode = styled(ButtonSendEmail)``
+
+export const ButtonSendCodeText = styled(ButtonSendEmailText)``
+
+export const ContainerCode = styled.View`
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+`
+
+export const CodeInput = styled.TextInput`
+    height: 55px;
+    width: 38px;
+    border-radius: 10px;
+    text-align: center;
+    padding: 2px;
+    font-size: 20px;
+    background-color: ${theme.colors.color_light}
 `
 
 export const styles = StyleSheet.create({

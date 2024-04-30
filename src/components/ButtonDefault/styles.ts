@@ -13,7 +13,7 @@ export const ButtonEntry = styled.TouchableOpacity`
 `
 
 export const ButtonEntryText = styled.Text`
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     text-transform: uppercase;
     color: ${theme.button_login.color};

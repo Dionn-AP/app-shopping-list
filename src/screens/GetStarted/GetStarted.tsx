@@ -106,7 +106,7 @@ const GetStarted = () => {
             {props.navigationState.routes.map((route: any, i: number) => (
                 <ButtonTabView
                     key={i + route.key + "route"}
-                    style={{ backgroundColor: index === i ? theme.colors.tertiary : theme.colors.color_light }}
+                    style={{  backgroundColor: index === 4 ? theme.colors.background : (index === i ? theme.colors.tertiary  : theme.colors.color_light) }}
                 />
             ))}
         </FooterTabView>
