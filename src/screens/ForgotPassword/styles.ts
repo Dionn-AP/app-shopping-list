@@ -1,7 +1,6 @@
 import styled from 'styled-components/native';
-import { StyleSheet, Dimensions } from 'react-native';
+import { StyleSheet } from 'react-native';
 import theme from '../../styles/theme';
-const { width } = Dimensions.get('window');
 
 export const ContainerForgotPassword = styled.View`
     display: flex;
@@ -66,6 +65,10 @@ export const ContainerCode = styled.View`
     gap: 14px;
 `
 
+export const ContainerCodeAndTimer = styled(ContainerCode)`
+    flex-direction: column;
+` 
+
 export const CodeInput = styled.TextInput`
     height: 55px;
     width: 38px;
@@ -73,11 +76,31 @@ export const CodeInput = styled.TextInput`
     text-align: center;
     padding: 2px;
     font-size: 20px;
-    background-color: ${theme.colors.color_light}
+    background-color: ${theme.colors.color_light};
 `
+
+export const ContainerInputsPassword = styled(ContainerContentTop)`
+    gap: 20px;
+`
+
+export const InputNewPassword = styled.View`
+    position: relative;
+    height: auto;
+    width: 100%;
+`
+
+export const InputConfirmPassword = styled(InputNewPassword)``
+
+export const ButtonConfirmNewPassword = styled(ButtonSendEmail)``
+
+export const ButtonSendNewPassword = styled(ButtonSendEmailText)``
 
 export const styles = StyleSheet.create({
     disabled_button: {
         backgroundColor: 'rgba(179, 233, 199, 0.7)'
+    },
+    position_absolute: {
+        position: "absolute",
+        top: 100
     }
 });
