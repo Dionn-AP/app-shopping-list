@@ -76,7 +76,7 @@ const FifthRoute: React.FC = () => (
             text="Login"
             colorButton={theme.button_login.color}
             bgColor={theme.button_login.background}
-            screen="login"
+            screen="home"
         />
     </ContainerGetStarted >
 )
