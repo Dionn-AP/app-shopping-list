@@ -5,7 +5,7 @@ const theme = {
       tertiary: '#B3E9C7',
       accent: '#8367C7',
       background: '#5603AD',
-      color_light: '#FFFFFF',
+      color_light: '#EDF2FA',
       color_text_default: '#252627',
       color_error: '#F93943'
     },
@@ -14,7 +14,7 @@ const theme = {
       color: '#5603AD'
     },
     button_signup: {
-      background: '#FFFFFF',
+      background: '#EDF2FA',
       color: '#5603AD'
     }
   };

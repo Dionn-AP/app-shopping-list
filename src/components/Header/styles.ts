@@ -4,18 +4,23 @@ import { StyleSheet } from 'react-native';
 
 export const ContainerHeader = styled.View`
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-end;
-    padding: 16px 5%;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding: 14px 5%;
     background-color: ${theme.colors.background};
     height: 124px;
     width: 100%;
-    margin-bottom: 50px;
+    margin-bottom: 40px;
+`
+
+export const ButtonLogout = styled.TouchableOpacity`
+
+
 `
 
 export const NameUser = styled.Text`
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
     color: ${theme.colors.color_light};
 `

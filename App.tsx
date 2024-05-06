@@ -1,5 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { RootRoutes } from './src/route';
+import { AuthProvider } from './src/context/AuthContext';
 import Loading from './src/components/Loading/Loading';
 import {
   useFonts,
@@ -29,9 +30,9 @@ export default function App() {
     )
   }
   return (
-    <>
+    <AuthProvider>
       <RootRoutes />
       <StatusBar backgroundColor="transparent" translucent />
-    </>
+    </AuthProvider>
   );
 }

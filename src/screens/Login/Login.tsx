@@ -15,15 +15,26 @@ import { SafeAreaView } from 'react-native';
 import GoBackButton from '../../components/GoBack/GoBack';
 import Logo from '../../assets/logo.svg';
 import InputDefault from '../../components/InputDefault/InputDefault';
-import ButtonDefault from '../../components/ButtonDefault/ButtonDefault';
 
-import theme from '../../styles/theme';
+import { useAuth } from '../../context/AuthContext';
 
 const LoginScreen = () => {
     const nav = useNavigation();
+    const { login } = useAuth();
 
     const [inputEmail, setInputEmail] = useState("");
     const [inputPassword, setInputPassword] = useState("");
+
+
+    const handleLogin = (email: string, pass: string) => {
+        if (!inputEmail.length || !inputPassword.length) {
+            return;
+        }
+
+        login(email, pass);
+
+    }
+
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -44,13 +55,12 @@ const LoginScreen = () => {
                     </InputDefault>
                 </ContainerInputsLogin>
 
-                <ButtonDefault
-                    text="Entrar"
-                    colorButton={theme.button_login.color}
-                    bgColor={theme.button_login.background}
-                    screen="getstarted"
-                    positionButton="absolute"
-                />
+                <ButtonEntry
+                    onPress={() => handleLogin(inputEmail, inputPassword)}
+                    activeOpacity={0.8}
+                >
+                    <ButtonEntryText>Entrar</ButtonEntryText>
+                </ButtonEntry>
 
                 <ForgotPassword onPress={() => nav.navigate("forgot")} activeOpacity={1}>
                     <ForgotPasswordText style={{ fontFamily: "Montserrat_500Medium" }}>Esqueci minha senha</ForgotPasswordText>
