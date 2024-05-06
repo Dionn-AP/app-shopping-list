@@ -1,6 +1,7 @@
-import { View, StyleSheet, Text } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import React, { useState } from "react";
 import theme from "../../styles/theme";
+import { useAuth } from "../../context/AuthContext";
 
 import {
     TextGetStarted,
@@ -14,16 +15,7 @@ interface IPropsPages {
 }
 
 const GetStartedPage: React.FC<IPropsPages> = ({ text, step }) => {
-    const [checked, setChecked] = useState(false);
-    const [notTutorial, setNotTutorial] = useState(true);
-
-    const handleTutorial = () => {
-        setChecked(true);
-
-        if(checked) {
-            setNotTutorial(false);
-        }
-    }
+    const { handleTutorial, checked } = useAuth();
 
     return (
         <>

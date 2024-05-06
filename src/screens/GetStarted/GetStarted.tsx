@@ -73,7 +73,7 @@ const FifthRoute: React.FC = () => (
             step={5}
         />
         <ButtonDefault
-            text="Login"
+            text="Ir para Home"
             colorButton={theme.button_login.color}
             bgColor={theme.button_login.background}
             screen="home"

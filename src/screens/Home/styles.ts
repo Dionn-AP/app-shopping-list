@@ -1,5 +1,6 @@
 import styled from 'styled-components/native';
 import theme from '../../styles/theme';
+import { StyleSheet } from 'react-native';
 
 export const ContainerHome = styled.View`
     display: flex;
@@ -19,8 +20,9 @@ export const ContainerContentHome = styled.View`
     align-items: flex-start;
     justify-content: flex-start;
     height: auto;
+    padding: 0 4%;
     width: 100%;
-    gap: 20px;
+    gap: 26px;
 `
 
 export const OptionScreen = styled.TouchableOpacity`
@@ -30,8 +32,8 @@ export const OptionScreen = styled.TouchableOpacity`
     height: auto;
     align-items: center;
     justify-content: flex-start;
-    padding: 0 4%;
-    gap: 10px;
+    padding: 0;
+    gap: 14px;
 `
 
 export const OptionItem = styled.Text`
@@ -41,3 +43,28 @@ export const OptionItem = styled.Text`
     color: ${theme.colors.background};
     margin-bottom: 4px;
 `
+
+export const CircleIcon = styled.View`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 47px;
+    width: 47px;
+    border-radius: 50px;
+    background-color: ${theme.colors.background};
+`
+
+export const styles = StyleSheet.create({
+    container_icon: {
+        display: "flex",
+        position: 'relative',
+        alignItems: "center",
+        justifyContent: "center",
+        elevation: 25,
+        borderRadius: 50,
+        height: 44,
+        width: 44,
+        backgroundColor: 'white',
+        shadowColor: '#171717',
+    }
+});
