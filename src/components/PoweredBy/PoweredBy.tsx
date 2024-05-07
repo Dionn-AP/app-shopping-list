@@ -26,13 +26,13 @@ const styles = StyleSheet.create({
     text_first: {
         fontSize: 10,
         fontWeight: "300",
-        color: theme.colors.color_text_default,
+        color: theme.colors.color_light,
         opacity: 0.7
     },
     text_second: {
         fontSize: 10,
         fontWeight: "bold",
-        color: theme.colors.background,
+        color: theme.colors.color_light,
         opacity: 0.7
     }
 });

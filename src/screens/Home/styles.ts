@@ -66,5 +66,10 @@ export const styles = StyleSheet.create({
         width: 44,
         backgroundColor: 'white',
         shadowColor: '#171717',
+    },
+    wave: {
+        position: "absolute",
+        left: -70,
+        bottom: 0
     }
 });

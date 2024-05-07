@@ -7,12 +7,10 @@ import {
     styles
 } from './styles';
 
-import IconPlus from '../../assets/icon-plus.svg';
-import IconList from '../../assets/icon-list.svg';
-import IconReport from '../../assets/icon-report.svg';
-
 import Header from '../../components/Header/Header';
 import PoweredBy from '../../components/PoweredBy/PoweredBy';
+
+import Wave from '../../assets/wave.svg';
 
 import { FontAwesome6 } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -50,6 +48,7 @@ const Home = () => {
                     <OptionItem>Relatórios</OptionItem>
                 </OptionScreen>
             </ContainerContentHome>
+            <Wave style={styles.wave} />
             <PoweredBy />
         </ContainerHome>
     );
