@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 
 export const ContainerHeader = styled.View`
     display: flex;
+    position: relative;
     flex-direction: row;
     align-items: flex-end;
     justify-content: space-between;
@@ -19,7 +20,7 @@ export const ButtonLogout = styled.TouchableOpacity`
 
 `
 
-export const NameUser = styled.Text`
+export const TitleScreen = styled.Text`
     font-size: 18px;
     font-weight: 500;
     color: ${theme.colors.color_light};

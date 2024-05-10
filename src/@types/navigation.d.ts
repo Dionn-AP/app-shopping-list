@@ -7,6 +7,8 @@ export declare global {
             signup: undefined;
             forgot: undefined;
             home: undefined;
+            mylists: undefined;
+            newlist: undefined;
         }
     }
 }

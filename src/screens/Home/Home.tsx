@@ -7,6 +7,8 @@ import {
     styles
 } from './styles';
 
+import { useNavigation } from '@react-navigation/native';
+
 import Header from '../../components/Header/Header';
 import PoweredBy from '../../components/PoweredBy/PoweredBy';
 
@@ -17,13 +19,21 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { Octicons } from '@expo/vector-icons';
 
 import theme from '../../styles/theme';
+import { useAuth } from '../../context/AuthContext';
 
 const Home = () => {
+    const nav = useNavigation();
+    const { authData } = useAuth();
+
     return (
         <ContainerHome>
-            <Header />
+            <Header
+                title={`Olá, ${authData?.user.username?.split(" ")[0]}`}
+            />
             <ContainerContentHome>
-                <OptionScreen activeOpacity={0.8}>
+                <OptionScreen
+                    onPress={() => nav.navigate("newlist")}
+                    activeOpacity={0.8}>
                     <CircleIcon>
                         <FontAwesome6
                             name="plus"
@@ -32,7 +42,9 @@ const Home = () => {
                     </CircleIcon>
                     <OptionItem>Criar nova lista</OptionItem>
                 </OptionScreen>
-                <OptionScreen activeOpacity={0.8}>
+                <OptionScreen
+                    onPress={() => nav.navigate("mylists")}
+                    activeOpacity={0.8}>
                     <CircleIcon>
                         <FontAwesome5
                             name="list-ul"

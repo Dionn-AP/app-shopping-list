@@ -1,21 +1,35 @@
 import {
     ContainerHeader,
-    NameUser,
+    TitleScreen,
     ButtonLogout,
     styles
 } from './styles';
+
+import GoBackButton from '../GoBack/GoBack';
+
+import { useRoute } from '@react-navigation/native';
 
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { useAuth } from '../../context/AuthContext';
 import theme from '../../styles/theme';
 
-const Header = () => {
+interface IPropsTextHeader {
+    title?: string;
+}
+
+const Header = ({ title }: IPropsTextHeader) => {
     const { authData, logout } = useAuth();
+    const route = useRoute();
 
     return (
         <ContainerHeader style={styles.shadow_header}>
-            <NameUser>{`Olá, ${authData?.user.username?.split(" ")[0]}`}</NameUser>
+            {
+                route.name !== "home" &&
+                <GoBackButton screen='home' />
+            }
+
+            <TitleScreen>{title}</TitleScreen>
             <ButtonLogout
                 onPress={() => logout()}
                 activeOpacity={0.8}

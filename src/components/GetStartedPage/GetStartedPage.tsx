@@ -31,7 +31,7 @@ const GetStartedPage: React.FC<IPropsPages> = ({ text, step }) => {
 
                 <ContainerFooter>
                     <CheckBox
-                        checked={checked}
+                        checked={!checked}
                         containerStyle={styles.checkbox_background}
                         checkedColor={theme.colors.tertiary}
                         checkedIcon="dot-circle-o"
