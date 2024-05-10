@@ -2,44 +2,26 @@ import styled from 'styled-components/native';
 import theme from '../../styles/theme';
 import { StyleSheet } from 'react-native';
 
-export const ContainerMyLists = styled.View`
+export const ContainerList = styled.View`
     display: flex;
-    position: relative;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-    height: 100%;
+    height: auto;
     width: 100%;
-    padding: 0;
-    background-color: ${theme.colors.color_light};
-`
-
-export const ContainerContentMyLists = styled.View`
-    display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: auto;
-    padding: 0 4%;
-    width: 100%;
+    gap: 12px;
+    padding-bottom: 110px;
 `
 
-export const TextContentTop = styled.Text`
-    font-size: 18px;
-    font-weight: 500;
-    color: ${theme.colors.background};
-    text-align: center;
-`
-
-export const ContainerList = styled.View`
+export const ContainerContentList = styled.View`
     display: flex;
     flex-direction: row;
     height: auto;
     width: 100%;
-    padding: 12px 14px;
-    border-radius: 12px;
-    border: 1.5px solid ${theme.colors.accent};
-    background-color: ${theme.colors.primary};
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-radius: 10px;
+    border: 1px solid ${theme.colors.accent};
 `
 
 export const ContainerListLeft = styled.View`
@@ -61,25 +43,19 @@ export const NameList = styled.Text`
     font-weight: bold;
     text-align: left;
     color: ${theme.colors.background};
+    margin-bottom: 10px;
 `
 
-export const CreatedAndStatusList = styled(NameList)`
-    font-size: 14px;
-    font-weight: normal;
+export const NameItem = styled(NameList)`
+    font-size: 16px;
     color: ${theme.colors.accent};
 `
-export const DateAndStatus = styled(CreatedAndStatusList)`
-    color: ${theme.colors.color_text_default};
+
+export const Items = styled.Text`
+    font-size: 14px;
+    font-weight: 500;
+    color: ${theme.colors.accent};
 `
-
-
-export const TotalPriceList = styled.Text`
-    font-size: 18px;
-    font-weight: bold;
-    text-align: right;
-    color: ${theme.colors.color_text_default};
-`
-
 
 export const TotalPrice = styled.View`
     display: flex;
@@ -88,10 +64,9 @@ export const TotalPrice = styled.View`
     justify-content: space-between;
     height: auto;
     width: 100%;
-    padding: 14px 16px;
-    border-radius: 8px;
-    position: fixed;
-    bottom: 20%;
+    padding: 14px 18px;
+    position: absolute;
+    bottom: 0;
     background-color: ${theme.colors.tertiary};
     z-index: 5;
 `
@@ -108,16 +83,11 @@ export const TotalPriceTextNumber = styled(TotalPriceText)`
     color: ${theme.colors.background};
 `
 
-
-
 export const styles = StyleSheet.create({
-    wave: {
-        position: "absolute",
-        left: -70,
-        bottom: 0
+    scrollview_container: {
+        paddingBottom: 120
     },
-    text_entry_content_top: {
-        fontWeight: "700",
-        textDecorationLine: "underline"
+    fontsize_total_price: {
+        fontWeight: 'bold'
     }
-});
+})

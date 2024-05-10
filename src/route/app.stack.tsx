@@ -12,7 +12,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const { Navigator, Screen } = createNativeStackNavigator();
 
 const AppStack = () => {
-    const { notTutorial } = useAuth();
+    const { authData } = useAuth();
     return (
         <Navigator
             screenOptions={{
@@ -20,7 +20,7 @@ const AppStack = () => {
             }}
         >
             {
-                notTutorial &&
+                authData?.user.tutorial &&
                 <Screen name="getstarted" component={GetStarted} />
             }
             <Screen name="home" component={Home} />
