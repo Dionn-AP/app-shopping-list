@@ -2,8 +2,9 @@ import { createContext, useContext, useEffect, useState } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import api from "../services/axios";
 import { Alert } from "react-native";
-import { IPropsUser } from "../@types";
+import { IPropsUser, IPropsRegisterUser } from "../@types";
 import { getHeaders } from "../utils/token";
+import { regexValidationEmail } from "../utils/validations";
 
 interface Props {
   children: React.ReactNode;
@@ -13,10 +14,14 @@ interface AuthContextData {
   authData?: IPropsUser;
   login: (email: string, password: string) => Promise<IPropsUser>;
   logout: () => Promise<void>;
+  signup: (username: string, email: string, password: string, confirmPassword: string) => Promise<IPropsRegisterUser>;
   loading: boolean;
-  notTutorial: boolean;
   checked: boolean;
   total: number;
+  error: string;
+  success: boolean;
+  setSuccess: React.Dispatch<React.SetStateAction<boolean>>;
+  setError: React.Dispatch<React.SetStateAction<string>>;
   setTotal: React.Dispatch<React.SetStateAction<number>>;
   handleTutorial: () => Promise<void>;
 }
@@ -29,8 +34,9 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
   const [authData, setAuthData] = useState<IPropsUser>();
   const [loading, setLoading] = useState(false);
   const [checked, setChecked] = useState(true);
-  const [notTutorial, setNotTutorial] = useState(true);
   const [total, setTotal] = useState(0);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
 
   async function loadFromStorage() {
     try {
@@ -47,6 +53,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
   }
 
   async function login(email: string, password: string) {
+    setError("");
 
     try {
       setLoading(true);
@@ -61,12 +68,48 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
       AsyncStorage.setItem('@AuthData', JSON.stringify(auth.data));
       return auth.data;
     } catch (error: any) {
-      setLoading(false)
-      if (error.response.status < 423) {
-        return Alert.alert('Algo deu errado', error.response.data.message);
+      setLoading(false);
+      setError("");
+      return Alert.alert('Algo deu errado, Tente novamente');
+    }
+  }
+
+  async function signup(username: string, email: string, password: string, confirmPassword: string) {
+    try {
+
+      if (!email || (email && !regexValidationEmail.test(String(email).toLowerCase()))) {
+        setError('Você precisa informar um email válido')
+        return;
       }
-      console.log(error.response.status)
-      return Alert.alert('Algo deu errado', 'Erro de conexão com o servidor');
+
+      if (password !== confirmPassword) {
+        setError("As senhas precisam ser iguais");
+        return;
+      }
+
+      setLoading(true);
+
+      const dataUser = {
+        username,
+        email,
+        password,
+        phone: ""
+      };
+
+      const createdUser = await api.post('/user', { ...dataUser });
+
+      setError("");
+
+      setLoading(false);
+      setSuccess(true);
+      return createdUser.data;
+
+    } catch (error) {
+      setLoading(false);
+      setError("");
+      setSuccess(false);
+
+      return Alert.alert('Algo deu errado', 'Tente novamente');
     }
   }
 
@@ -74,13 +117,12 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     setChecked(!checked);
 
     try {
-      console.log(authData?.token);
-      
+
       const response = await api.patch('/tutorial', {
         tutorial: false
       }, getHeaders(authData?.token));
       console.log(response.data);
-      
+
       Alert.alert(response.data);
     } catch (error) {
       console.error('Erro ao buscar listas:', error);
@@ -97,17 +139,21 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     loadFromStorage();
   }, []);
 
-  return <AuthContext.Provider value={{ 
-    authData, 
-    loading, 
-    login, 
+  return <AuthContext.Provider value={{
+    authData,
+    loading,
+    login,
     logout,
-    handleTutorial, 
-    notTutorial, 
+    handleTutorial,
     checked,
+    error,
+    setError,
     total,
-    setTotal
-    }}>
+    setTotal,
+    signup,
+    success,
+    setSuccess
+  }}>
     {children}
   </AuthContext.Provider>
 };

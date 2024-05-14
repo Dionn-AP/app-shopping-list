@@ -5,10 +5,11 @@ import {
     ButtonEntryText,
     ForgotPassword,
     ForgotPasswordText,
+    MessageError,
     styles
 } from './styles';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native';
 
@@ -20,14 +21,18 @@ import { useAuth } from '../../context/AuthContext';
 
 const LoginScreen = () => {
     const nav = useNavigation();
-    const { login } = useAuth();
+    const { login, setError, error, setSuccess } = useAuth();
+
+    useEffect(() => {
+        setSuccess(false);
+    }, []);
 
     const [inputEmail, setInputEmail] = useState("");
     const [inputPassword, setInputPassword] = useState("");
 
-
     const handleLogin = (email: string, pass: string) => {
         if (!inputEmail.length || !inputPassword.length) {
+            setError("Você precisa informar e-mail e senha");
             return;
         }
 
@@ -55,16 +60,21 @@ const LoginScreen = () => {
                     </InputDefault>
                 </ContainerInputsLogin>
 
+                {
+                    error &&
+                    <MessageError>{error}</MessageError>
+                }
+
+                <ForgotPassword onPress={() => nav.navigate("forgot")} activeOpacity={1}>
+                    <ForgotPasswordText style={{ fontFamily: "Montserrat_500Medium" }}>Esqueci minha senha</ForgotPasswordText>
+                </ForgotPassword>
+
                 <ButtonEntry
                     onPress={() => handleLogin(inputEmail, inputPassword)}
                     activeOpacity={0.8}
                 >
                     <ButtonEntryText>Entrar</ButtonEntryText>
                 </ButtonEntry>
-
-                <ForgotPassword onPress={() => nav.navigate("forgot")} activeOpacity={1}>
-                    <ForgotPasswordText style={{ fontFamily: "Montserrat_500Medium" }}>Esqueci minha senha</ForgotPasswordText>
-                </ForgotPassword>
             </ContainerHome>
         </SafeAreaView>
     )

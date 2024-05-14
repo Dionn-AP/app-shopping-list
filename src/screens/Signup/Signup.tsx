@@ -1,13 +1,12 @@
 import { Text, SafeAreaView } from 'react-native';
 import { CheckBox } from '@rneui/themed';
-import { useState } from 'react';
-import { useNavigation } from '@react-navigation/native';
+import { useEffect, useState } from 'react';
+
+import Loading from '../../components/Loading/Loading';
 
 import InputDefault from '../../components/InputDefault/InputDefault';
 import GoBackButton from '../../components/GoBack/GoBack';
 import theme from '../../styles/theme';
-
-import ImageSuccessfully from '../../assets/image-register-successfully.svg'
 
 import {
     ContainerSignup,
@@ -16,32 +15,43 @@ import {
     ButtonRegisterText,
     ContainerFooter,
     ContainerSignupData,
-    ContainerSignupSuccessFully,
     styles
 } from './styles';
-import ButtonDefault from '../../components/ButtonDefault/ButtonDefault';
+
+import { useAuth } from '../../context/AuthContext';
+import { MessageError } from '../Login/styles';
+import { useNavigation } from '@react-navigation/native';
 
 const SignUp = () => {
+    const nav = useNavigation();
+    const { signup, success, setSuccess, error, setError, loading } = useAuth();
     const [checked, setChecked] = useState(false);
-    const [success, setSuccess] = useState(false);
     const [inputFirstName, setInputFirstName] = useState("");
-    const [inputLastName, setInputLastName] = useState("");
     const [inputEmail, setInputEmail] = useState("");
     const [inputPassword, setInputPassword] = useState("");
     const [inputConfirmPassword, setInputConfirmPassword] = useState("");
 
+    setSuccess(false);
+    setError("");
+
     const verifyInputEmpty = () => {
-        if (!inputFirstName || !inputLastName || !inputEmail || !inputPassword || !inputConfirmPassword) {
+        if (!inputFirstName || !inputEmail || !inputPassword || !inputConfirmPassword) {
             return true;
         }
-    }
+    };
+
+    useEffect(() => {
+        if (success) {
+            nav.navigate("successfull");
+        }
+    }, [])
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <ContainerSignup>
 
                 {
-                    !success ?
+                    !loading ?
 
                         <ContainerSignupData>
 
@@ -53,10 +63,6 @@ const SignUp = () => {
                                     setValue={setInputFirstName}
                                     stateValue={inputFirstName}
                                     placeholderType="Nome"></InputDefault>
-                                <InputDefault
-                                    setValue={setInputLastName}
-                                    stateValue={inputLastName}
-                                    placeholderType='Sobrenome'></InputDefault>
                                 <InputDefault
                                     setValue={setInputEmail}
                                     stateValue={inputEmail}
@@ -71,6 +77,12 @@ const SignUp = () => {
                                     stateValue={inputConfirmPassword}
                                     security={true}
                                     placeholderType='Confirme a senha'></InputDefault>
+
+                                {
+                                    error &&
+                                    <MessageError>{error}</MessageError>
+                                }
+
                             </ContainerInputsSignUp>
 
                             <ContainerFooter>
@@ -87,7 +99,7 @@ const SignUp = () => {
                                 style={(!checked || verifyInputEmpty()) && styles.disabled_button}
                                 disabled={!checked}
                                 activeOpacity={0.8}
-                                onPress={() => setSuccess(true)}
+                                onPress={() => signup(inputFirstName, inputEmail, inputPassword, inputConfirmPassword)}
                             >
                                 <ButtonRegisterText>Cadastrar</ButtonRegisterText>
                             </ButtonRegister>
@@ -95,19 +107,7 @@ const SignUp = () => {
 
                         :
 
-                        <ContainerSignupSuccessFully>
-                            <Text style={[styles.text_header_successfully, { fontFamily: "Montserrat_600SemiBold" }]} >Parabéns. Usuário cadastrado com sucesso!</Text>
-                            <ImageSuccessfully />
-
-                            <ButtonDefault
-                                text="Login"
-                                colorButton={theme.button_login.color}
-                                bgColor={theme.button_login.background}
-                                screen="login"
-                                positionButton="absolute"
-                            />
-
-                        </ContainerSignupSuccessFully>
+                        <Loading />
 
                 }
 

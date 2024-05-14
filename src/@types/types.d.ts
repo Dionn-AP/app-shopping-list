@@ -9,3 +9,11 @@ export interface IPropsUser {
         tutorial: boolean;
     }
 }
+
+export interface IPropsRegisterUser {
+    username?: string;
+    email: string;
+    password: string;
+    confirmPass: string;
+    phone?: string;
+} 

@@ -68,6 +68,14 @@ export const ForgotPasswordText = styled.Text`
     font-style: normal;
 `
 
+export const MessageError = styled.Text`
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    color: ${theme.colors.color_error};
+    margin: 0px 0 8px;
+`
+
 export const styles = StyleSheet.create({
     logo: {
         marginBottom: 40,

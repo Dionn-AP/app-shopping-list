@@ -75,14 +75,6 @@ export const styles = StyleSheet.create({
         color: theme.colors.color_light,
         fontWeight: "500"
     },
-    text_header_successfully: {
-        textAlign: "center",
-        fontSize: 20,
-        color: theme.colors.color_light,
-        fontWeight: "500",
-        position: "absolute",
-        top: "15%"
-    },
     text_footer: {
         fontSize: 12,
         fontWeight: "400",
@@ -96,4 +88,4 @@ export const styles = StyleSheet.create({
     disabled_button: {
         backgroundColor: 'rgba(179, 233, 199, 0.7)'
     }
-})
+});

@@ -26,6 +26,7 @@ interface ListItem {
     id: number;
     name: string;
     createdAt: string;
+    statusList: string;
     items: Item[]; // items é um array de Item
 }
 
@@ -33,7 +34,7 @@ interface IPropsList {
     itemsList: ListItem; // itemsList agora é do tipo ListItem ou null
 }
 
-const List = ({ itemsList }: IPropsList) => {
+const ListFinished = ({ itemsList }: IPropsList) => {
     const { total, setTotal } = useAuth();
 
     const totalPricesList = () => {
@@ -44,7 +45,6 @@ const List = ({ itemsList }: IPropsList) => {
             // Somar o preço total do item ao acumulador
             return acc + itemTotalPrice;
         }, 0);
-    
         return totalPrice;
     }
 
@@ -80,4 +80,4 @@ const List = ({ itemsList }: IPropsList) => {
     );
 }
 
-export default List;
+export default ListFinished;

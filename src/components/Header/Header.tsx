@@ -19,7 +19,7 @@ interface IPropsTextHeader {
 }
 
 const Header = ({ title }: IPropsTextHeader) => {
-    const { authData, logout } = useAuth();
+    const { logout } = useAuth();
     const route = useRoute();
 
     return (
@@ -30,12 +30,15 @@ const Header = ({ title }: IPropsTextHeader) => {
             }
 
             <TitleScreen>{title}</TitleScreen>
-            <ButtonLogout
-                onPress={() => logout()}
-                activeOpacity={0.8}
-            >
-                <MaterialCommunityIcons name="logout" size={30} color={theme.colors.color_light} />
-            </ButtonLogout>
+            {
+                route.name === "home" &&
+                <ButtonLogout
+                    onPress={() => logout()}
+                    activeOpacity={0.8}
+                >
+                    <MaterialCommunityIcons name="logout" size={30} color={theme.colors.color_light} />
+                </ButtonLogout>
+            }
         </ContainerHeader>
     );
 }

@@ -9,6 +9,7 @@ export declare global {
             home: undefined;
             mylists: undefined;
             newlist: undefined;
+            successfull: undefined;
         }
     }
 }

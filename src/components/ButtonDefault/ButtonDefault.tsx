@@ -23,7 +23,7 @@ const ButtonDefault = ({ text, colorButton, bgColor, screen, positionButton, dat
 
     return (
         <ButtonEntry
-            onPress={() => dataUser ? login(dataUser!.email, dataUser!.password) : nav.navigate(screen)}
+            onPress={() => dataUser ? login(dataUser!.user.email, dataUser!.user.password) : nav.navigate(screen)}
             activeOpacity={0.8}
             style={{ position: positionButton, backgroundColor: bgColor }}>
             <ButtonEntryText style={{ color: colorButton, fontFamily: "Montserrat_600SemiBold" }}>{text}</ButtonEntryText>

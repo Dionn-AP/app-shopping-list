@@ -119,5 +119,8 @@ export const styles = StyleSheet.create({
     text_entry_content_top: {
         fontWeight: "700",
         textDecorationLine: "underline"
+    },
+    card_list: {
+        marginBottom: 16
     }
 });
