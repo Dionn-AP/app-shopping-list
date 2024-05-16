@@ -24,6 +24,7 @@ interface AuthContextData {
   setError: React.Dispatch<React.SetStateAction<string>>;
   setTotal: React.Dispatch<React.SetStateAction<number>>;
   handleTutorial: () => Promise<void>;
+  updateUserDataLocalStorage: (updatedUserData: Partial<IPropsUser["user"]>) => Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextData>(
@@ -49,6 +50,24 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     } catch (error) {
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function updateUserDataLocalStorage(updatedUserData: Partial<IPropsUser["user"]>): Promise<void> {
+    try {
+      const authDataString = await AsyncStorage.getItem('@AuthData');
+
+      if(authDataString) {
+        const authData: IPropsUser = JSON.parse(authDataString);
+        const newUser: IPropsUser["user"] = { ...authData.user, ... updatedUserData };
+        const newAuthData: IPropsUser = { ...authData, user: newUser };
+        await AsyncStorage.setItem('@AuthData', JSON.stringify(newAuthData));
+        loadFromStorage();
+      } else {
+        console.error('Nenhum dado de autenticação encontrado no Storage');
+      }
+    } catch (error: any) {
+      console.error("Erro ao tentar atualizar os dados do usuário no storage", error);
     }
   }
 
@@ -152,7 +171,8 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     setTotal,
     signup,
     success,
-    setSuccess
+    setSuccess,
+    updateUserDataLocalStorage
   }}>
     {children}
   </AuthContext.Provider>

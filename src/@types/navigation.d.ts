@@ -10,6 +10,7 @@ export declare global {
             mylists: undefined;
             newlist: undefined;
             successfull: undefined;
+            userinfo: undefined;
         }
     }
 }

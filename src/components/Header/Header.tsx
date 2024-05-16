@@ -7,11 +7,12 @@ import {
 
 import GoBackButton from '../GoBack/GoBack';
 
-import { useRoute } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
 
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 
 import { useAuth } from '../../context/AuthContext';
+import api from '../../services/axios';
 import theme from '../../styles/theme';
 
 interface IPropsTextHeader {
@@ -19,8 +20,10 @@ interface IPropsTextHeader {
 }
 
 const Header = ({ title }: IPropsTextHeader) => {
+    const nav = useNavigation();
     const { logout } = useAuth();
     const route = useRoute();
+
 
     return (
         <ContainerHeader style={styles.shadow_header}>
@@ -30,13 +33,19 @@ const Header = ({ title }: IPropsTextHeader) => {
             }
 
             <TitleScreen>{title}</TitleScreen>
+
             {
-                route.name === "home" &&
+                (route.name === "home" || route.name === "userinfo") &&
+
                 <ButtonLogout
-                    onPress={() => logout()}
+                    onPress={() => (route.name === "home") && nav.navigate("userinfo")}
                     activeOpacity={0.8}
                 >
-                    <MaterialCommunityIcons name="logout" size={30} color={theme.colors.color_light} />
+                    <FontAwesome
+                        name="user-circle-o"
+                        size={38}
+                        color={theme.colors.color_light} />
+                    {/* <MaterialCommunityIcons name="logout" size={30} color={theme.colors.color_light} /> */}
                 </ButtonLogout>
             }
         </ContainerHeader>
