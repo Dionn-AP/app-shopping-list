@@ -8,6 +8,7 @@ import NewList from "../screens/NewList/NewList";
 import { useAuth } from "../context/AuthContext";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import UserInfo from "../screens/UserInfo/UserInfo";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -26,6 +27,7 @@ const AppStack = () => {
             <Screen name="home" component={Home} />
             <Screen name="mylists" component={MyLists} />
             <Screen name="newlist" component={NewList} />
+            <Screen name="userinfo" component={UserInfo} />
         </Navigator>
     );
 };
