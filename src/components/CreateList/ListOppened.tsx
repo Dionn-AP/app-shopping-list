@@ -44,7 +44,7 @@ const InputPriceComponet: React.FC<{ value: string, onChangeText: (value: string
     );
 };
 
-const ListOppened = ({ itemsList }: IPropsList) => {
+const CreateList = ({ itemsList }: IPropsList) => {
     const { setTotal } = useAuth();
     const [itemPrices, setItemPrices] = useState<{ [id: number]: number }>({});
     const [itemQuantities, setItemQuantities] = useState<{ [id: number]: number }>({});
@@ -147,4 +147,4 @@ const ListOppened = ({ itemsList }: IPropsList) => {
     );
 }
 
-export default ListOppened;
+export default CreateList;
