@@ -17,3 +17,20 @@ export interface IPropsRegisterUser {
     confirmPass: string;
     phone?: string;
 } 
+
+interface Item {
+    id?: number;
+    name: string;
+    quantity?: number;
+    unit?: string;
+    price?: number;
+    status?: string;
+}
+
+interface ListItem {
+    id: number;
+    name: string;
+    createdAt: string;
+    statusList: string;
+    items: Item[]; // items é um array de Item
+}
