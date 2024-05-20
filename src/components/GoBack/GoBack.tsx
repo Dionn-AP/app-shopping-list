@@ -1,21 +1,33 @@
 import { AntDesign } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
-import { TouchableOpacity } from 'react-native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { Alert, TouchableOpacity } from 'react-native';
 import { StyleSheet } from 'react-native';
 import theme from '../../styles/theme';
 import React from 'react';
+import { Item } from '../../@types';
 
 type GoBackButtonProps = {
     screen: keyof ReactNavigation.RootParamList;
+    items?: Item[]
   };
 
-const GoBackButton: React.FC<GoBackButtonProps> = ({screen}) => {
+const GoBackButton: React.FC<GoBackButtonProps> = ({screen, items}) => {
     const nav = useNavigation();
+    const route = useRoute();
+
+    const navigationScreen = () => {
+        if(route.name === "newlist" && items!.length > 0) {
+            Alert.alert('Atenção', 'Se você retornar à tela anterior sem salvar esta lista, os dados serão perdidos')
+            return
+        } else {
+            nav.navigate(screen);
+        }
+    }
 
     return(
         <TouchableOpacity
             activeOpacity={0.7}
-            onPress={() => nav.navigate(screen)}
+            onPress={navigationScreen}
             style={styles.button}
         >
             <AntDesign

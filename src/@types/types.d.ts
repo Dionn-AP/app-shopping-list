@@ -16,7 +16,7 @@ export interface IPropsRegisterUser {
     password: string;
     confirmPass: string;
     phone?: string;
-} 
+}
 
 interface Item {
     id?: number;
@@ -33,4 +33,19 @@ interface ListItem {
     createdAt: string;
     statusList: string;
     items: Item[]; // items é um array de Item
+}
+
+interface DataList {
+    name: string;
+    items: Partial<Item[
+        {
+            name: string;
+            quantity: number;
+            unit: string;
+            price: number;
+            status: string;
+        }
+    ]>
+
+
 }

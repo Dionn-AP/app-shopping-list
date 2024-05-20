@@ -15,21 +15,28 @@ import {
     ButtonDelete,
     MessageBoxItemsDeleted,
     MessageBoxItemsDeletedText,
+    SaveList,
     styles
 } from './styles';
 import { Modal, ScrollView, Text, TextInput, TouchableOpacity, View, Alert } from 'react-native';
 import { MaterialCommunityIcons, Ionicons } from '@expo/vector-icons';
 import { FontAwesome6 } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
 import Header from "../../components/Header/Header";
 import theme from '../../styles/theme';
-import { Item } from '../../@types';
+import { DataList, Item } from '../../@types';
 import { useNavigation } from '@react-navigation/native';
 import { ContainerContentList, ContainerList, NameItem, NameList } from '../../components/ListOppened/styles';
 import { ButtonCloseModal } from '../UserInfo/styles';
 import { CheckBox } from '@rneui/themed';
 import { ContainerListLeft } from '../MyLists/styles';
 import Progress from '../../components/Progress/Progress';
+import api from '../../services/axios';
+import { getHeaders } from '../../utils/token';
+import { useAuth } from '../../context/AuthContext';
+import LoadingIn from '../../components/LoadingIn/LoadingIn';
 
 interface OptionUnitState {
     selected: number;
@@ -38,7 +45,11 @@ interface OptionUnitState {
 
 const NewList = () => {
     const nav = useNavigation();
+    const { authData } = useAuth();
 
+    const [load, setLoad] = useState(false);
+    const [createNewList, setCreateNewList] = useState(false);
+    const [success, setSuccess] = useState(false);
     const [itemName, setItemName] = useState('');
     const [items, setItems] = useState<Item[]>([]);
     const [modalVisible, setModalVisible] = useState(false);
@@ -115,7 +126,6 @@ const NewList = () => {
         setEditIndex(index);
     };
 
-
     const handleDeleteItems = () => {
         Alert.alert(
             "Deletar Itens",
@@ -133,7 +143,7 @@ const NewList = () => {
                         setItems(updatedItems);
                         setCheckedItems([]);
                         setMessage(`Um total de ${totalSelected} ${totalSelected > 1 ? "itens foram excluídos" : "item foi excluído"} `);
-                        //setProgress(0);
+                       
                         setTimeout(() => {
                             setMessage("");
                         }, 3000);
@@ -146,8 +156,46 @@ const NewList = () => {
     };
 
     const handleCreateList = () => {
+        if(!listName) {
+            return;
+        }
         setModalVisible(false);
-        //nav.navigate("mylists");
+    }
+
+    const handleCreateListInDataBase = async () => {
+        if (items.length < 1) {
+            Alert.alert("Ops", "Você não pode salvar uma lista vazia. Adicione pelo menos um item.");
+        }
+
+        const dataList: DataList = {
+            name: listName,
+            items: [...items]
+        }
+
+        try {
+            setLoad(true);
+
+            const response = await api.post('/create/list', {
+                ...dataList
+            }, getHeaders(authData?.token));
+
+            setSuccess(true);
+
+            setTimeout(() => {
+                setCreateNewList(true);
+                setSuccess(false);
+                setLoad(false);
+                setItems([]);
+                setListName("");
+            }, 2000)
+
+        } catch (error: any) {
+            setLoad(false);
+            setCreateNewList(false);
+            setSuccess(false);
+            Alert.alert("Ops", "Não foi possível criar a lista.")
+            console.log("Erro", "Algo deu errado", error);
+        }
     };
 
     const handleVisibleSelectedItems = () => {
@@ -165,7 +213,7 @@ const NewList = () => {
 
     return (
         <ContainerNewList>
-            <Header title='Criar lista' />
+            <Header title='Criar lista' items={items} />
             <ContainerContentNewList>
                 <ContainerInputsSearchItems>
                     <InputSearchItems
@@ -180,48 +228,54 @@ const NewList = () => {
                             color={theme.colors.background} />
                     </ButtonSearchAdd>
                 </ContainerInputsSearchItems>
-                <ContainerUnitAndSelect>
-                    <ContainerUnit>
-                        <ContentUnit
-                            activeOpacity={0.8}
-                            style={optionUnit.selected === 1 ? styles.background_unit_selected : styles.background_unit_unselected}
-                            onPress={() => selectUnit("unidade")}>
-                            <TextUnit style={optionUnit.selected === 1 ? styles.color_unit_selected : styles.color_unit_unselected}>unidade</TextUnit>
-                        </ContentUnit>
-                        <ContentUnit
-                            activeOpacity={0.8}
-                            style={optionUnit.unselected === 1 ? styles.background_unit_selected : styles.background_unit_unselected}
-                            onPress={() => selectUnit("kg")}>
-                            <TextUnit style={optionUnit.unselected === 1 ? styles.color_unit_selected : styles.color_unit_unselected}>kg</TextUnit>
-                        </ContentUnit>
-                    </ContainerUnit>
 
-                    {
-                        items.length > 0 &&
-                        <ContainerSelect>
-                            <CheckBox
-                                checked={checked}
-                                containerStyle={styles.checkbox_wrapper}
-                                center
-                                checkedTitle={
-                                    (checkedItems.length > 0 && checkedItems.length < 2) ?
-                                        `${checkedItems.length} Selecionado` :
-                                        `${checkedItems.length} Selecionados`
-                                }
-                                textStyle={checked ? styles.checkbox_title_checked : styles.checkbox_title}
-                                title="Selecionar itens"
-                                onPress={handleVisibleSelectedItems}
-                                iconType="material-community"
-                                checkedIcon="checkbox-outline"
-                                uncheckedIcon={'checkbox-blank-outline'}
-                                checkedColor={theme.colors.tertiary}
-                            />
-                        </ContainerSelect>
-                    }
+                {
+                    listName ?
+                    <ContainerUnitAndSelect>
+                        <ContainerUnit>
+                            <ContentUnit
+                                activeOpacity={0.8}
+                                style={optionUnit.selected === 1 ? styles.background_unit_selected : styles.background_unit_unselected}
+                                onPress={() => selectUnit("unidade")}>
+                                <TextUnit style={optionUnit.selected === 1 ? styles.color_unit_selected : styles.color_unit_unselected}>unidade</TextUnit>
+                            </ContentUnit>
+                            <ContentUnit
+                                activeOpacity={0.8}
+                                style={optionUnit.unselected === 1 ? styles.background_unit_selected : styles.background_unit_unselected}
+                                onPress={() => selectUnit("kg")}>
+                                <TextUnit style={optionUnit.unselected === 1 ? styles.color_unit_selected : styles.color_unit_unselected}>kg</TextUnit>
+                            </ContentUnit>
+                        </ContainerUnit>
 
-                </ContainerUnitAndSelect>
+                        {
+                            items.length > 0 &&
+                            <ContainerSelect>
+                                <CheckBox
+                                    checked={checked}
+                                    containerStyle={styles.checkbox_wrapper}
+                                    center
+                                    checkedTitle={
+                                        (checkedItems.length > 0 && checkedItems.length < 2) ?
+                                            `${checkedItems.length} Selecionado` :
+                                            `${checkedItems.length} Selecionados`
+                                    }
+                                    textStyle={checked ? styles.checkbox_title_checked : styles.checkbox_title}
+                                    title="Selecionar itens"
+                                    onPress={handleVisibleSelectedItems}
+                                    iconType="material-community"
+                                    checkedIcon="checkbox-outline"
+                                    uncheckedIcon={'checkbox-blank-outline'}
+                                    checkedColor={theme.colors.tertiary}
+                                />
+                            </ContainerSelect>
+                        }
 
-                <NameList style={styles.container_name_list}>{listName}</NameList>
+                    </ContainerUnitAndSelect>
+                    :
+                    <Text style={styles.text_top_new_lists}>Comece criando um item para a sua lista</Text>
+                }
+
+                <NameList onPress={() => setModalVisible(true)} style={listName ? styles.container_name_list : null}>{listName}</NameList>
 
                 <ScrollView
                     showsVerticalScrollIndicator={false}
@@ -268,8 +322,6 @@ const NewList = () => {
                     </ContainerContentItems>
                 </ScrollView>
 
-
-
             </ContainerContentNewList>
             <Modal
                 animationType="slide"
@@ -298,20 +350,29 @@ const NewList = () => {
                             style={styles.button_modal}
                             activeOpacity={0.8}
                             onPress={handleCreateList}>
-                            <Text style={styles.text_button_modal}>Criar lista</Text>
+                            <Text style={styles.text_button_modal}>Salvar</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
             </Modal>
 
             {
-                checkedItems.length > 0 &&
-                <ButtonDelete
-                    activeOpacity={0.8}
-                    onPress={handleDeleteItems}
-                >
-                    <FontAwesome5 name="trash-alt" size={26} color={theme.colors.color_light} />
-                </ButtonDelete>
+                checkedItems.length > 0 ?
+                    <ButtonDelete
+                        activeOpacity={0.8}
+                        onPress={handleDeleteItems}
+                    >
+                        <FontAwesome5 name="trash-alt" size={26} color={theme.colors.color_light} />
+                    </ButtonDelete>
+                    :
+                    (checkedItems.length === 0 && items.length > 0) &&
+                    <SaveList
+                        activeOpacity={0.8}
+                        onPress={handleCreateListInDataBase}
+                    >
+                        <Entypo name="shopping-cart" size={26} color={theme.colors.background} />
+                        <Text style={styles.save_list_text}>Salvar</Text>
+                    </SaveList>
             }
 
             {
@@ -324,6 +385,43 @@ const NewList = () => {
                     />
                 </MessageBoxItemsDeleted>
             }
+
+            {
+                createNewList &&
+                <MessageBoxItemsDeleted style={styles.box_create_newlist}>
+                    <ButtonCloseModal onPress={() => setCreateNewList(false)}>
+                        <Ionicons
+                            name="close-circle"
+                            size={24}
+                            color={theme.colors.background} />
+                    </ButtonCloseModal>
+                    <MessageBoxItemsDeletedText>Deseja acessar a <Text onPress={() => nav.navigate("mylists")} style={styles.text_new_list}>nova lista</Text> criada?</MessageBoxItemsDeletedText>
+                </MessageBoxItemsDeleted>
+            }
+
+
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={load}
+                onRequestClose={() => {
+                    setLoad(!load);
+                }}
+            >
+                <View style={styles.backgroun_opacity}>
+
+                    {
+                        success ?
+                            <View style={styles.success_create}>
+                                <AntDesign name="checkcircle" size={80} color={theme.colors.tertiary} />
+                            </View>
+                            :
+                            <LoadingIn colorLoading={theme.colors.background} />
+                    }
+
+                </View>
+            </Modal>
+
 
         </ContainerNewList>
     );
