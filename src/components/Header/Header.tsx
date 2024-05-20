@@ -14,14 +14,16 @@ import { FontAwesome } from '@expo/vector-icons';
 import { useAuth } from '../../context/AuthContext';
 import api from '../../services/axios';
 import theme from '../../styles/theme';
+import { Alert } from 'react-native';
+import { Item } from '../../@types';
 
 interface IPropsTextHeader {
     title?: string;
+    items: Item[]
 }
 
-const Header = ({ title }: IPropsTextHeader) => {
+const Header = ({ title, items }: IPropsTextHeader) => {
     const nav = useNavigation();
-    const { logout } = useAuth();
     const route = useRoute();
 
 
@@ -29,7 +31,7 @@ const Header = ({ title }: IPropsTextHeader) => {
         <ContainerHeader style={styles.shadow_header}>
             {
                 route.name !== "home" &&
-                <GoBackButton screen='home' />
+                <GoBackButton screen={"home"} items={items}/>
             }
 
             <TitleScreen>{title}</TitleScreen>

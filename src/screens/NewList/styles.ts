@@ -64,7 +64,7 @@ export const ContainerItemsList = styled.View`
     justify-content: flex-start;
     height: auto;
     width: 100%;
-` 
+`
 
 export const ContainerUnitAndSelect = styled.View`
     display: flex;
@@ -125,6 +125,12 @@ export const ButtonDelete = styled.TouchableOpacity`
     border-radius: 50px;
 `
 
+export const SaveList = styled(ButtonDelete)`
+    height: 58px;
+    width: 58px;
+    background-color: ${theme.colors.tertiary};
+`
+
 export const MessageBoxItemsDeleted = styled.View`
     display: flex;
     position: relative;
@@ -133,7 +139,6 @@ export const MessageBoxItemsDeleted = styled.View`
     justify-content: space-between;
     height: 55px;
     width: 100%;
-    border-radius: 10px;
     background-color: ${theme.colors.tertiary};
     position: absolute;
     padding: 10px 0 0;
@@ -148,7 +153,28 @@ export const MessageBoxItemsDeletedText = styled.Text`
     margin-left: 16px;
 `
 
+
 export const styles = StyleSheet.create({
+    backgroun_opacity: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "rgba(0, 0, 0, 0.3)"
+    },
+    success_create: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: 80,
+        width: 80,
+        borderRadius: 50,
+        backgroundColor: theme.colors.background
+    },
+    text_new_list: {
+        fontSize: 16,
+        fontWeight: "700",
+        textDecorationLine: "underline"
+    },
     container_items_left: {
         gap: 4
     },
@@ -273,4 +299,18 @@ export const styles = StyleSheet.create({
         borderRadius: 8,
         overflow: 'hidden',
     },
+    box_create_newlist: {
+        paddingTop: 13,
+        alignItems: "center"
+    },
+    save_list_text: {
+        fontSize: 10,
+        color: theme.colors.background
+    },
+    text_top_new_lists: {
+        fontSize: 16,
+        textAlign: "center",
+        fontWeight: "500",
+        color: theme.colors.background
+    }
 });
