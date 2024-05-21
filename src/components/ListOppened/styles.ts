@@ -4,12 +4,13 @@ import { StyleSheet } from 'react-native';
 
 export const ContainerList = styled.View`
     display: flex;
-    height: auto;
-    width: 100%;
+    position: relative;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    padding-bottom: 110px;
+    height: auto;
+    padding: 0 0 110px;
+    width: 100%;
 `
 
 export const ContainerContentList = styled.View`
@@ -117,9 +118,33 @@ export const InputPrice = styled.TextInput`
 
 export const styles = StyleSheet.create({
     scrollview_container: {
-        paddingBottom: 120
+        paddingBottom: 120,
+        gap: 12
     },
     fontsize_total_price: {
         fontWeight: 'bold'
+    },
+    save_list_text: {
+        fontSize: 10,
+        color: theme.colors.background
+    },
+    box_update_list: {
+        bottom: "15%",
+        right: "1%"
+    },
+    background_opacity: {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center",
+        backgroundColor: "rgba(0, 0, 0, 0.3)"
+    },
+    success_create: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        height: 80,
+        width: 80,
+        borderRadius: 50,
+        backgroundColor: theme.colors.background
     }
 })

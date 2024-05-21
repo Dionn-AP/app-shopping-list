@@ -19,7 +19,7 @@ import { Item } from '../../@types';
 
 interface IPropsTextHeader {
     title?: string;
-    items: Item[]
+    items?: Item[]
 }
 
 const Header = ({ title, items }: IPropsTextHeader) => {

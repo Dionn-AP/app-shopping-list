@@ -408,7 +408,7 @@ const NewList = () => {
                     setLoad(!load);
                 }}
             >
-                <View style={styles.backgroun_opacity}>
+                <View style={styles.background_opacity}>
 
                     {
                         success ?

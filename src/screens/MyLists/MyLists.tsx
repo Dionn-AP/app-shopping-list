@@ -56,17 +56,17 @@ const MyLists = () => {
 
   useEffect(() => {
     fetchLists();
-
-
   }, []);
 
   const fetchLists = async () => {
     try {
       const response = await api.get('/lists', getHeaders(authData?.token));
-      setLists(response.data);
+
+      const sortedList = response.data.sort((a: ListItem, b: ListItem) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+
+      setLists(sortedList);
 
       setLoading(true);
-
 
     } catch (error) {
       console.error('Erro ao buscar listas:', error);
@@ -101,7 +101,7 @@ const MyLists = () => {
         {!loading && <LoadingIn colorLoading={theme.colors.background} />}
 
         {loading &&
-          accessList > 0 ? status === "Finalizada" ? 
+          accessList > 0 ? status === "Finalizada" ?
 
           <ListFinished
             itemsList={lists.find(list => list.id === accessList) || { id: 0, name: "", createdAt: "", statusList: "", items: [] }}
@@ -110,25 +110,25 @@ const MyLists = () => {
           <ListOppened
             itemsList={lists.find(list => list.id === accessList) || { id: 0, name: "", createdAt: "", statusList: "", items: [] }}
           />
-         : (
-          lists.map(list => (
-        <TouchableOpacity onPress={() => enterList(list.id)} activeOpacity={0.7} key={list.id} style={styles.card_list}>
-          <ContainerList>
-            <ContainerListLeft>
-              <NameList>{list.name}</NameList>
-              <CreatedAndStatusList>Criado em</CreatedAndStatusList>
-              <CreatedAndStatusList>Status</CreatedAndStatusList>
-            </ContainerListLeft>
+          : (
+            lists.map(list => (
+              <TouchableOpacity onPress={() => enterList(list.id)} activeOpacity={0.7} key={list.id} style={styles.card_list}>
+                <ContainerList>
+                  <ContainerListLeft>
+                    <NameList>{list.name}</NameList>
+                    <CreatedAndStatusList>Criado em</CreatedAndStatusList>
+                    <CreatedAndStatusList>Status</CreatedAndStatusList>
+                  </ContainerListLeft>
 
-            <ContainerListRight>
-              <TotalPriceList>R$ {totalForList(list.id)}</TotalPriceList>
-              <DateAndStatus>{formatDate(list.createdAt)}</DateAndStatus>
-              <DateAndStatus>{list.statusList}</DateAndStatus>
-            </ContainerListRight>
-          </ContainerList>
-        </TouchableOpacity>
-        ))
-        )}
+                  <ContainerListRight>
+                    <TotalPriceList>R$ {totalForList(list.id)}</TotalPriceList>
+                    <DateAndStatus>{formatDate(list.createdAt)}</DateAndStatus>
+                    <DateAndStatus style={list.statusList === "Finalizada" ? styles.status_list_finished : styles.status_list_oppened}>{list.statusList}</DateAndStatus>
+                  </ContainerListRight>
+                </ContainerList>
+              </TouchableOpacity>
+            ))
+          )}
 
         {!lists.length &&
           <TextContentTop>
@@ -143,7 +143,7 @@ const MyLists = () => {
       </ContainerContentMyLists>
 
       {
-        accessList > 0  &&
+        accessList > 0 &&
         <TotalPrice>
           <TotalPriceText>Total</TotalPriceText>
           <TotalPriceTextNumber>R$ {total.toFixed(2)}</TotalPriceTextNumber>

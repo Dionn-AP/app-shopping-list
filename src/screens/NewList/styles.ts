@@ -155,7 +155,7 @@ export const MessageBoxItemsDeletedText = styled.Text`
 
 
 export const styles = StyleSheet.create({
-    backgroun_opacity: {
+    background_opacity: {
         flex: 1,
         alignItems: "center",
         justifyContent: "center",

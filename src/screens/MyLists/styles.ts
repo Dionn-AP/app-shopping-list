@@ -109,7 +109,6 @@ export const TotalPriceTextNumber = styled(TotalPriceText)`
 `
 
 
-
 export const styles = StyleSheet.create({
     wave: {
         position: "absolute",
@@ -122,5 +121,11 @@ export const styles = StyleSheet.create({
     },
     card_list: {
         marginBottom: 16
+    },
+    status_list_oppened: {
+        color: theme.colors.green_medium
+    },
+    status_list_finished: {
+        color: theme.colors.background
     }
 });
