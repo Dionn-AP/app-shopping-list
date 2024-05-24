@@ -13,7 +13,22 @@ import {
   Montserrat_700Bold,
 } from '@expo-google-fonts/montserrat';
 
+import { useEffect } from 'react';
+import * as SplashScreen from 'expo-splash-screen';
+
+SplashScreen.preventAutoHideAsync();
+
 export default function App() {
+  useEffect(() => {
+    const prepare = async () => {
+      // Aqui você pode carregar dados iniciais do app ou realizar alguma tarefa assíncrona
+      await new Promise(resolve => setTimeout(resolve, 2000)); // Exemplo de espera
+      SplashScreen.hideAsync(); // Esconde o splash screen quando o app estiver pronto
+    };
+
+    prepare();
+  }, []);
+
   const [fontsLoaded] = useFonts({
     Montserrat_100Thin,
     Montserrat_200ExtraLight,
