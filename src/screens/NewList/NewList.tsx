@@ -16,6 +16,7 @@ import {
     MessageBoxItemsDeleted,
     MessageBoxItemsDeletedText,
     SaveList,
+    ContainerList,
     styles
 } from './styles';
 import { Modal, ScrollView, Text, TextInput, TouchableOpacity, View, Alert } from 'react-native';
@@ -28,7 +29,7 @@ import Header from "../../components/Header/Header";
 import theme from '../../styles/theme';
 import { DataList, Item } from '../../@types';
 import { useNavigation } from '@react-navigation/native';
-import { ContainerContentList, ContainerList, NameItem, NameList } from '../../components/ListOppened/styles';
+import { ContainerContentList, NameItem, NameList } from '../ListOppened/styles';
 import { ButtonCloseModal } from '../UserInfo/styles';
 import { CheckBox } from '@rneui/themed';
 import { ContainerListLeft } from '../MyLists/styles';
@@ -201,6 +202,7 @@ const NewList = () => {
     const handleVisibleSelectedItems = () => {
         setChecked(!checked);
         setVisibleCheckedItem(!visibleCheckedItem);
+        setCheckedItems([]);
     }
 
     const handleToggleItemCheckbox = (index: number) => {
@@ -293,12 +295,12 @@ const NewList = () => {
                                             containerStyle={styles.checkbox_wrapper}
                                             center
                                             size={28}
-                                            checkedColor={theme.colors.background}
+                                            checkedColor={theme.colors.tertiary}
                                             onPress={() => handleToggleItemCheckbox(index)}
                                             iconType="material-community"
                                             checkedIcon="checkbox-outline"
                                             uncheckedIcon={'checkbox-blank-outline'}
-                                            uncheckedColor={theme.colors.accent}
+                                            uncheckedColor={theme.colors.background}
                                         />
                                     }
 

@@ -1,3 +1,5 @@
+import { ListItem } from "./types";
+
 export declare global {
     namespace ReactNavigation {
         interface RootParamList {
@@ -11,6 +13,8 @@ export declare global {
             newlist: undefined;
             successfull: undefined;
             userinfo: undefined;
+            listoppened: { itemsList: ListItem };
+            listfinished: { itemsList: ListItem };
         }
     }
 }
