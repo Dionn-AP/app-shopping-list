@@ -9,22 +9,32 @@ import { Item } from '../../@types';
 type GoBackButtonProps = {
     screen: keyof ReactNavigation.RootParamList;
     items?: Item[]
-  };
+};
 
-const GoBackButton: React.FC<GoBackButtonProps> = ({screen, items}) => {
+const GoBackButton: React.FC<GoBackButtonProps> = ({ screen, items }) => {
     const nav = useNavigation();
     const route = useRoute();
 
     const navigationScreen = () => {
-        if(route.name === "newlist" && items!.length > 0) {
+        if (route.name === "newlist" && items!.length > 0) {
             Alert.alert('Atenção', 'Se você retornar à tela anterior sem salvar esta lista, os dados serão perdidos')
             return
         } else {
-            nav.navigate(screen);
+            if (route.name === "listoppened" || route.name === "listfinished") {
+                nav.navigate("mylists")
+            }
+
+            if (route.name === "signup" || route.name === "login") {
+                nav.navigate("start");
+            }
+
+            if(route.name === "userinfo" || route.name === "mylists" || route.name === "newlist") {
+                nav.navigate("home");
+            }
         }
     }
 
-    return(
+    return (
         <TouchableOpacity
             activeOpacity={0.7}
             onPress={navigationScreen}

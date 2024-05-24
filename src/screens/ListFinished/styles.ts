@@ -2,6 +2,18 @@ import styled from 'styled-components/native';
 import theme from '../../styles/theme';
 import { StyleSheet } from 'react-native';
 
+export const ContainerListFinished = styled.View`
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    height: 100%;
+    width: 100%;
+    padding: 0 0 30px;
+    background-color: ${theme.colors.color_light};
+`
+
 export const ContainerList = styled.View`
     display: flex;
     height: auto;
@@ -9,7 +21,7 @@ export const ContainerList = styled.View`
     align-items: center;
     justify-content: center;
     gap: 12px;
-    padding-bottom: 110px;
+    padding: 0 4% 110px;
 `
 
 export const ContainerContentList = styled.View`
@@ -48,13 +60,13 @@ export const NameList = styled.Text`
 
 export const NameItem = styled(NameList)`
     font-size: 16px;
-    color: ${theme.colors.accent};
+    color: ${theme.colors.color_text_default};
 `
 
 export const Items = styled.Text`
     font-size: 14px;
     font-weight: 500;
-    color: ${theme.colors.accent};
+    color: ${theme.colors.background};
 `
 
 export const TotalPrice = styled.View`
@@ -85,9 +97,23 @@ export const TotalPriceTextNumber = styled(TotalPriceText)`
 
 export const styles = StyleSheet.create({
     scrollview_container: {
-        paddingBottom: 120
+        paddingBottom: 120,
+        gap: 10
     },
     fontsize_total_price: {
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        color: theme.colors.tertiary
+    },
+    box_shadow: {
+        backgroundColor: theme.colors.color_light,
+        shadowColor: theme.colors.color_text_default,
+        shadowOffset: {
+            width: 2,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        // Sombras para Android
+        elevation: 3,
     }
 })

@@ -27,7 +27,7 @@ interface Item {
     status?: string;
 }
 
-interface ListItem {
+export interface ListItem {
     id: number;
     name: string;
     createdAt: string;
@@ -35,7 +35,7 @@ interface ListItem {
     items: Item[]; // items é um array de Item
 }
 
-interface DataList {
+export interface DataList {
     name: string;
     items: Partial<Item[
         {
@@ -46,6 +46,4 @@ interface DataList {
             status: string;
         }
     ]>
-
-
 }

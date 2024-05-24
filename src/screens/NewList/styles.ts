@@ -25,6 +25,18 @@ export const ContainerContentNewList = styled.View`
     width: 100%;
 `
 
+export const ContainerList = styled.View`
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    padding: 0 0 110px;
+    width: 100%;
+    gap: 10px;
+`
+
 export const ContainerInputsSearchItems = styled.View`
     position: relative;
     height: auto;
@@ -155,7 +167,7 @@ export const MessageBoxItemsDeletedText = styled.Text`
 
 
 export const styles = StyleSheet.create({
-    backgroun_opacity: {
+    background_opacity: {
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
@@ -187,7 +199,7 @@ export const styles = StyleSheet.create({
     },
     checkbox_title_checked: {
         fontSize: 12,
-        color: theme.colors.accent
+        color: theme.colors.background
     },
     checkbox_wrapper: {
         height: "auto",
@@ -265,7 +277,7 @@ export const styles = StyleSheet.create({
         color: theme.colors.color_light
     },
     color_unit_selected: {
-        color: theme.colors.green_medium
+        color: theme.colors.color_light
     },
     background_unit_selected: {
         backgroundColor: theme.colors.tertiary

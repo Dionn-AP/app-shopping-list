@@ -9,6 +9,8 @@ import { useAuth } from "../context/AuthContext";
 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import UserInfo from "../screens/UserInfo/UserInfo";
+import ListOppened from "../screens/ListOppened/ListOppened";
+import ListFinished from "../screens/ListFinished/ListFinished";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -28,6 +30,8 @@ const AppStack = () => {
             <Screen name="mylists" component={MyLists} />
             <Screen name="newlist" component={NewList} />
             <Screen name="userinfo" component={UserInfo} />
+            <Screen name="listoppened" component={ListOppened} />
+            <Screen name="listfinished" component={ListFinished} />
         </Navigator>
     );
 };

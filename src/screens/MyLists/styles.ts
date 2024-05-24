@@ -66,7 +66,7 @@ export const NameList = styled.Text`
 export const CreatedAndStatusList = styled(NameList)`
     font-size: 14px;
     font-weight: normal;
-    color: ${theme.colors.accent};
+    color: ${theme.colors.color_text_default};
 `
 export const DateAndStatus = styled(CreatedAndStatusList)`
     color: ${theme.colors.color_text_default};
@@ -77,7 +77,7 @@ export const TotalPriceList = styled.Text`
     font-size: 18px;
     font-weight: bold;
     text-align: right;
-    color: ${theme.colors.color_text_default};
+    color: ${theme.colors.tertiary};
 `
 
 
@@ -109,7 +109,6 @@ export const TotalPriceTextNumber = styled(TotalPriceText)`
 `
 
 
-
 export const styles = StyleSheet.create({
     wave: {
         position: "absolute",
@@ -122,5 +121,11 @@ export const styles = StyleSheet.create({
     },
     card_list: {
         marginBottom: 16
+    },
+    status_list_oppened: {
+        color: theme.colors.green_medium
+    },
+    status_list_finished: {
+        color: theme.colors.background
     }
 });
