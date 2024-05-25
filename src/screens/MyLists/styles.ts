@@ -37,9 +37,9 @@ export const ContainerList = styled.View`
     height: auto;
     width: 100%;
     padding: 12px 14px;
-    border-radius: 12px;
-    border: 1.5px solid ${theme.colors.accent};
-    background-color: ${theme.colors.primary};
+    border-radius: 16px;
+    //border: 1.5px solid ${theme.colors.accent};
+
 `
 
 export const ContainerListLeft = styled.View`
@@ -68,10 +68,10 @@ export const CreatedAndStatusList = styled(NameList)`
     font-weight: normal;
     color: ${theme.colors.color_text_default};
 `
-export const DateAndStatus = styled(CreatedAndStatusList)`
-    color: ${theme.colors.color_text_default};
-`
 
+export const DateAndStatus = styled(CreatedAndStatusList)`
+    color: ${theme.colors.color_light};
+`
 
 export const TotalPriceList = styled.Text`
     font-size: 18px;
@@ -79,7 +79,6 @@ export const TotalPriceList = styled.Text`
     text-align: right;
     color: ${theme.colors.tertiary};
 `
-
 
 export const TotalPrice = styled.View`
     display: flex;
@@ -120,12 +119,50 @@ export const styles = StyleSheet.create({
         textDecorationLine: "underline"
     },
     card_list: {
-        marginBottom: 16
+        marginBottom: 16,
+        borderRadius: 16,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 3,
+        elevation: 5
     },
     status_list_oppened: {
         color: theme.colors.green_medium
     },
     status_list_finished: {
+        color: theme.colors.color_light
+    },
+    card_list_selected: {
+        backgroundColor: theme.colors.white,
+        borderColor: theme.colors.background,
+    },
+    card_list_selected_text_date: {
         color: theme.colors.background
-    }
+    },
+    deleteButtonContainer: {
+        position: 'absolute',
+        height: 'auto',
+        bottom: 20,
+        left: 0,
+        right: 0,
+        alignItems: 'center',
+    },
+    deleteButton: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: theme.colors.color_error,
+        paddingVertical: 0,
+        paddingHorizontal: 20,
+        height: 50,
+        borderRadius: 12,
+    },
+    deleteButtonText: {
+        color: theme.colors.color_light,
+        fontWeight: 'bold',
+    },
+    card_list_gradient: {
+        borderRadius: 16,
+    },
 });

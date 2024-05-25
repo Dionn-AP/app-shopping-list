@@ -10,7 +10,8 @@ const theme = {
     color_error: '#F93943',
     gray_light: '#d3d3d3',
     gray_medium: '#a9a9a9',
-    green_medium: '#40916c'
+    green_medium: '#40916c',
+    white: '#ffffff'
   },
   button_login: {
     background: '#e6aace',
